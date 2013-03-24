@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<title>Katie Countdown</title>
+<style type="text/css">
+    body { 
+        color:white;
+        font-size:30px;
+        padding:0;
+        margin:0;
+        background:url("joshuatree.jpg");
+        -webkit-animation: moveBackground 40s infinite ease;
+    }
+
+    .block {
+        float:left;
+        margin:40px;
+    }
+    .block div { 
+        float:left;
+        width:100px;
+        height:203px;
+        background:url("numbersimages.png");
+        -webkit-transition: background-position 0.3s;
+    }
+
+    @-webkit-keyframes moveBackground {
+        0% { background-position:0% 0px; }
+        50% { background-position:100% 0px; }
+        100%   { background-position:0% 0px; }
+    }
+
+    .labels {
+        background:url("labels.png");
+        height:109px;
+        width:997px;
+        margin:250px 0 0 77px;
+        position:absolute;
+    }
+    .sign {
+        background:url("sign.png");
+        height:422px;
+        width:377px;
+        position:absolute;
+        bottom:0px;
+        margin-left:301px;
+    }
+
+    .countdown {
+        width:1120px;
+        margin:0 auto;
+    }
+    .block div.n1 { background-position:0 0px; }
+    .block div.n2 { background-position:0 -202px; }
+    .block div.n3 { background-position:0 -404px; }
+    .block div.n4 { background-position:0 -605px; }
+    .block div.n5 { background-position:0 -807px; }
+    .block div.n6 { background-position:0 -1009px; }
+    .block div.n7 { background-position:0 -1209px; }
+    .block div.n8 { background-position:0 -1412px; }
+    .block div.n9 { background-position:0 -1613px; }
+    .block div.n0 { background-position:0 -1816px; }
+
+</style>
+<body>
+    <!--<img src="wallpaper.jpg" class="wallpaper" />-->
+    <div class="countdown">
+
+        <div class="block">
+            <div id="days1"></div>
+            <div id="days2"></div>
+        </div>
+
+        <div class="block">
+            <div id="hours1"></div>
+            <div id="hours2"></div>
+        </div>
+
+        <div class="block">
+            <div id="minutes1" class="n1"></div>
+            <div id="minutes2" class="n1"></div>
+        </div>
+
+        <div class="block">
+            <div id="seconds1"></div>
+            <div id="seconds2"></div>
+        </div>
+
+        <div class="labels"></div>
+        <div class="sign"></div>
+
+
+    </div>
+
+
+    <script type="text/javascript">
+    
+    function make_countdown(){
+
+        var current_time        = (new Date).getTime()/1000;
+        var katie_arrives       = 1366632000;
+        var seconds_in_a_day    = (60 * 60 * 24); //86400
+        var seconds_left        = katie_arrives - current_time;
+
+        var days_to_go          = Math.floor(seconds_left / seconds_in_a_day);
+        seconds_left            -= days_to_go * seconds_in_a_day
+
+        var seconds_in_an_hour  = (60*60);
+        var hours_to_go         = Math.floor(seconds_left / seconds_in_an_hour);
+        seconds_left            -= hours_to_go * seconds_in_an_hour
+
+        var seconds_in_a_minute = 60;
+        var minutes_to_go       = Math.floor(seconds_left / seconds_in_a_minute);
+        seconds_left            -= minutes_to_go * seconds_in_a_minute;
+        seconds_left            = Math.floor(seconds_left);
+
+        //document.getElementById("days").innerHTML       = days_to_go
+        //document.getElementById("hours").innerHTML      = hours_to_go
+        //document.getElementById("minutes").innerHTML    = minutes_to_go
+        //document.getElementById("seconds").innerHTML    = seconds_left
+
+        document.getElementById("days1").className      = "n"+Math.floor(days_to_go / 10)
+        document.getElementById("days2").className      = "n"+(days_to_go % 10)
+
+        document.getElementById("hours1").className     = "n"+Math.floor(hours_to_go / 10)
+        document.getElementById("hours2").className     = "n"+(hours_to_go % 10)
+
+        document.getElementById("minutes1").className   = "n"+Math.floor(minutes_to_go / 10)
+        document.getElementById("minutes2").className   = "n"+(minutes_to_go % 10)
+
+        document.getElementById("seconds1").className   = "n"+Math.floor(seconds_left / 10)
+        document.getElementById("seconds2").className   = "n"+(seconds_left % 10)
+
+        setTimeout(make_countdown, 1000);
+
+    }
+    make_countdown();
+
+    </script>
+</body>
